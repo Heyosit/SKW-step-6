@@ -58,15 +58,15 @@ class Player: SKSpriteNode {
     
     func setup(view: SKView) {
         
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
-        //        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: size.self)
-        self.physicsBody?.mass = 4.0
-        self.physicsBody?.isDynamic = true
-        self.physicsBody?.affectedByGravity = false
-        //        self.physicsBody?.categoryBitMask = PhysicsMask.player
-        //        self.physicsBody?.contactTestBitMask = PhysicsMask.mushroom
-        self.physicsBody?.collisionBitMask = 0
-        self.physicsBody?.restitution = 0.4
+//        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+//        //        self.physicsBody = SKPhysicsBody(texture: self.texture!, size: size.self)
+//        self.physicsBody?.mass = 4.0
+//        self.physicsBody?.isDynamic = true
+//        self.physicsBody?.affectedByGravity = false
+//        //        self.physicsBody?.categoryBitMask = PhysicsMask.player
+//        //        self.physicsBody?.contactTestBitMask = PhysicsMask.mushroom
+//        self.physicsBody?.collisionBitMask = 0
+//        self.physicsBody?.restitution = 0.4
         self.position = plus(left: GameManager.shared.gameMatrix[0][3], right: playerPositionAdapted)
         squarePlayerPosition = (0,3)
         destination = position
@@ -114,6 +114,16 @@ class Player: SKSpriteNode {
             {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
                 debugPrint("destination: \(GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])")
+//                let orientation: CGFloat =  1.0
+//                self.xScale = fabs(self.xScale) * orientation
+//
+//                // Interpolation
+//                let animWalk = SKAction.run { self.animate(type: "walk") }
+//                let move = SKAction.moveTo(x: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1].x, duration: 0.3)
+//                move.timingMode = .easeOut
+//                let animIdle = SKAction.run { self.animate(type: "idle") }
+//                let animation = SKAction.sequence([animWalk, move, animIdle])
+//                self.run(animation)
                 setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])
                 squarePlayerPosition.1 += 1
             }else {
@@ -141,6 +151,16 @@ class Player: SKSpriteNode {
             {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
                 debugPrint("destination: \(GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1])")
+//                let orientation: CGFloat =  -1.0
+//                self.xScale = fabs(self.xScale) * orientation
+//
+//                // Interpolation
+//                let animWalk = SKAction.run { self.animate(type: "walk") }
+//                let move = SKAction.moveTo(x: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1].x, duration: 0.3)
+//                move.timingMode = .easeOut
+//                let animIdle = SKAction.run { self.animate(type: "idle") }
+//                let animation = SKAction.sequence([animWalk, move, animIdle])
+//                self.run(animation)
                 setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1])
                 squarePlayerPosition.1 -= 1
             }else {
@@ -156,6 +176,16 @@ class Player: SKSpriteNode {
             {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
                 debugPrint("destination: \(GameManager.shared.gameMatrix[squarePlayerPosition.0 - 1 ][squarePlayerPosition.1 + 1])")
+//                let orientation: CGFloat =  -1.0
+//                self.xScale = fabs(self.xScale) * orientation
+//
+//                // Interpolation
+//                let animWalk = SKAction.run { self.animate(type: "walk") }
+//                let move = SKAction.moveTo(x: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1].x, duration: 0.3)
+//                move.timingMode = .easeOut
+//                let animIdle = SKAction.run { self.animate(type: "idle") }
+//                let animation = SKAction.sequence([animWalk, move, animIdle])
+//                self.run(animation)
                 setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 - 1][squarePlayerPosition.1 + 1])
                 squarePlayerPosition.0 -= 1
                 squarePlayerPosition.1 += 1
@@ -183,11 +213,13 @@ class Player: SKSpriteNode {
         }
     }
     
-    
+    func beIdle() {
+        self.animate(type: "idle")
+    }
     
     func setDestination(destination: CGPoint) {
         self.destination = plus(left: destination, right: playerPositionAdapted)
-        firstTime = false
+        firstTime = true
         self.animate(type: "walk")
     }
     func stickMovement(deltaTime: TimeInterval) {
@@ -199,7 +231,7 @@ class Player: SKSpriteNode {
         let distance = CGPoint(x: fabs(destination.x - position.x), y: fabs(destination.y - position.y))
         debugPrint("distance: \(distance)")
         let difference = fabs(lastDistance.x - distance.x)
-        if distance.x < difference - 4{
+        if distance.x == lastDistance.x{
             debugPrint("sono nell if")
             if firstTime{
                 firstTime = false
@@ -257,11 +289,14 @@ class Player: SKSpriteNode {
     //    }
     func animate(type: String) {
         var textureType: [SKTexture]
+        let animation: SKAction
         switch type {
         case "idle":
             textureType = textureIdle
+            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 3.0))
         case "walk":
             textureType = textureWalk
+            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 12.0))
             //        case "jump":
             //            textureType = textureJump
             //        case "fire":
@@ -270,8 +305,11 @@ class Player: SKSpriteNode {
         //      textureType = textureBeam
         default:
             textureType = textureIdle
+            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 3.0))
         }
-        let animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 5.0))
+        
+        
+        
         self.run(SKAction.repeatForever(animation))
     }
     
