@@ -23,9 +23,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        if isMoving == false {
-            oldLady.animate(type: "idle")
-        }
+//        if isMoving == false {
+//            oldLady.animate(type: "idle")
+//        }
     
         //Background
 
@@ -73,25 +73,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isMoving = true
         debugPrint("swipeup")
         oldLady.moveUp()
-        isMoving = false
+//        isMoving = false
     }
     @objc func swipeMoveRight() {
         isMoving = true
         debugPrint("swiperight")
         oldLady.moveRight()
-        isMoving = false
+//        isMoving = false
     }
     @objc func swipeMoveDown() {
         isMoving = true
         debugPrint("swipedown")
         oldLady.moveDown()
-        isMoving = false
+//        isMoving = false
     }
     @objc func swipeMoveLeft() {
         isMoving = true
         oldLady.moveLeft()
         debugPrint("swipelefy")
-        isMoving = false
+//        isMoving = false
     }
     
     func touchDown(atPoint pos: CGPoint) {

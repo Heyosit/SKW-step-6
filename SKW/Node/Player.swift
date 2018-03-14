@@ -28,7 +28,10 @@ class Player: SKSpriteNode {
     //States
     var attacking = false
     var isBouncing = false
-    
+    var lastDistance = CGPoint(x: 0, y: 0)
+    var isIdle = false
+    var firstTime = false
+
     
     
     init() {
@@ -184,43 +187,60 @@ class Player: SKSpriteNode {
     
     func setDestination(destination: CGPoint) {
         self.destination = plus(left: destination, right: playerPositionAdapted)
+        firstTime = false
         self.animate(type: "walk")
     }
     func stickMovement(deltaTime: TimeInterval) {
         // Calculate Distance
+        if !isIdle{
+            self.animate(type: "idle")
+            isIdle = true
+        }
         let distance = CGPoint(x: fabs(destination.x - position.x), y: fabs(destination.y - position.y))
-        //        debugPrint("distance: \(distance)")
-        // Change Orientation
-        let orientation: CGFloat = destination.x >= position.x ? 1.0 : -1.0
-        self.xScale = fabs(self.xScale) * orientation
-        let orientationY: CGFloat = destination.y >= position.y ? 1.0 : -1.0
-        
-        let deltaMove = velocity * CGFloat(deltaTime)
-        if (distance.x > deltaMove || distance.y > deltaMove) {
-            if(distance.x > deltaMove){
-                //          position.x += (orientation * deltaMove) - position.y
-                position.x += (orientation * deltaMove)
-                //                debugPrint("pos \(position.x) dis \(distance)")
+        debugPrint("distance: \(distance)")
+        let difference = fabs(lastDistance.x - distance.x)
+        if distance.x < difference - 4{
+            debugPrint("sono nell if")
+            if firstTime{
+                firstTime = false
+                isIdle = false
             }
-            if(distance.y > deltaMove){
-                position.y += orientationY * deltaMove
-                //            position.x -= position.y
+            
+        }else{
+            
+            lastDistance = distance
+            // Change Orientation
+            let orientation: CGFloat = destination.x >= position.x ? 1.0 : -1.0
+            self.xScale = fabs(self.xScale) * orientation
+            let orientationY: CGFloat = destination.y >= position.y ? 1.0 : -1.0
+            
+            let deltaMove = velocity * CGFloat(deltaTime)
+            if (distance.x > deltaMove || distance.y > deltaMove) {
+                if(distance.x > deltaMove){
+                    //          position.x += (orientation * deltaMove) - position.y
+                    position.x += (orientation * deltaMove)
+                    //                debugPrint("pos \(position.x) dis \(distance)")
+                }
+                if(distance.y > deltaMove){
+                    position.y += orientationY * deltaMove
+                    //            position.x -= position.y
+                    
+                    //                debugPrint("pos \(position.y) dis \(distance)")
+                }
                 
-                //                debugPrint("pos \(position.y) dis \(distance)")
+                
+            } else
+                //            if distance.x < 0.4 && distance.y < 4.5
+            {
+                position.x = destination.x
+                position.y = destination.y
+                if orientation == -1.0 {
+                    self.xScale = fabs(self.xScale)
+                }
+//                isIdle = false
+                
+                debugPrint("end dis \(distance)")
             }
-            
-            
-        } else
-            //            if distance.x < 0.4 && distance.y < 4.5
-        {
-            position.x = destination.x
-            position.y = destination.y
-            if orientation == -1.0 {
-                self.xScale = fabs(self.xScale)
-            }
-            
-//            self.animate(type: "idle")
-            //                  debugPrint("end dis \(distance)")
         }
     }
     
