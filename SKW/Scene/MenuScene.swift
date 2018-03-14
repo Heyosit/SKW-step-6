@@ -8,16 +8,21 @@
 import SpriteKit
 
 class MenuScene: SKScene {
+    
+//let sound = SKAudioNode(fileNamed: "menuAudio.mp3")
+    
 
   override func didMove(to view: SKView) {
 
     debugPrint("view: \(view.frame)")
     backgroundColor = .white
 
-    let bg = SKSpriteNode(color: .yellow, size: CGSize(width: 100, height: 100))
-    bg.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
-    bg.zPosition = Z.background
-    addChild(bg)
+    let background = SKSpriteNode(imageNamed: "backgroundMenuScene")
+    background.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
+    background.zPosition = Z.background
+    addChild(background)
+
+    playBackgroundMusic(filename: "menuAudio.mp3")
 
     let gameLabel = SKLabelNode(fontNamed: "Courier")
     gameLabel.fontSize = 40
@@ -26,27 +31,22 @@ class MenuScene: SKScene {
     gameLabel.position = CGPoint(x: size.width / 2, y: size.height / 1.2)
     addChild(gameLabel)
 
-    let buttonStart = SKSpriteNode(imageNamed: "buttonStart-normal")
+    let buttonStart = SKSpriteNode(imageNamed: "start")
     buttonStart.name = "buttonStart"
     buttonStart.position = CGPoint(x: size.width / 2, y: size.height / 2.8)
     buttonStart.size = SpriteSize.button
     buttonStart.zPosition = Z.HUD
     addChild(buttonStart)
 
-    let perna = SKSpriteNode(imageNamed: "perna")
-    perna.position = CGPoint(x: size.width / 2, y: size.height / 6)
-    perna.setScale(1.5)
-    perna.texture?.filteringMode = .nearest
-    perna.zPosition = Z.sprites
-    addChild(perna)
   }
+
 
   func touchDown(atPoint pos: CGPoint) {
 //    debugPrint("menu down: \(pos)")
     let touchedNode = self.atPoint(pos)
     if touchedNode.name == "buttonStart" {
       let button = touchedNode as! SKSpriteNode
-      button.texture = SKTexture(imageNamed: "buttonStart-pressed")
+      button.texture = SKTexture(imageNamed: "startPressed")
     }
   }
 
@@ -56,14 +56,17 @@ class MenuScene: SKScene {
     let touchedNode = self.atPoint(pos)
 
     if let button = childNode(withName: "buttonStart") as? SKSpriteNode {
-      button.texture = SKTexture(imageNamed: "buttonStart-normal")
+      button.texture = SKTexture(imageNamed: "start")
     }
 
     if touchedNode.name == "buttonStart" {
-      self.run(SKAction.playSoundFileNamed("good.m4a", waitForCompletion: false))
+      self.run(SKAction.playSoundFileNamed("startScream.mp3", waitForCompletion: false))
+        
+    backgroundMusicPlayer.setVolume(0, fadeDuration: 5)
+
       let scene = GameScene(size: size)
       scene.scaleMode = scaleMode
-      let transitionType = SKTransition.flipHorizontal(withDuration: 0.5)
+      let transitionType = SKTransition.doorsOpenHorizontal(withDuration: 5)
       view?.presentScene(scene, transition: transitionType)
     }
 

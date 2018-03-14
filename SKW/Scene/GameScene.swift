@@ -4,7 +4,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Actors
     let oldLady = Player()
-//    let zombieMovePointsPerSec: CGFloat = 480.0
     var velocity = CGPoint.zero
     
     
@@ -14,9 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Special
     var isMoving = false
-    
-    
-    
+
     override func sceneDidLoad() {
         self.physicsWorld.contactDelegate = self
         //    self.physicsWorld.gravity = CGVector(dx:0, dy: -9.8)
@@ -26,13 +23,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        
+        if isMoving == false {
+            oldLady.animate(type: "idle")
+        }
+    
         //Background
-        
-//        let bg = SKSpriteNode(color: .yellow, size: CGSize(width: 400, height: 400))
-//        bg.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
-//        bg.zPosition = Z.background
-//        addChild(bg)
+
         
                 let background = SKSpriteNode(imageNamed: "scene1Background")
                 background.position = CGPoint(x: size.width/2, y: size.height/2)
@@ -44,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         GameManager.shared.setup(view: self.view!)
         
         // Player
-        debugPrint("setup oldLady")
+        debugPrint( GameManager.shared.setup)
         oldLady.setup(view: self.view!)
         oldLady.zPosition = 100
         //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
@@ -54,9 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //Audio
-        //        playBackgroundMusic(filename: "scene1Audio.mp3")
-        alarm.name = "alarm"
-        alarm.autoplayLooped = true
+        let alarm = SKAudioNode(fileNamed: "scene1Audio")
         addChild(alarm)
         
         
@@ -79,21 +73,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isMoving = true
         debugPrint("swipeup")
         oldLady.moveUp()
+        isMoving = false
     }
     @objc func swipeMoveRight() {
         isMoving = true
         debugPrint("swiperight")
         oldLady.moveRight()
+        isMoving = false
     }
     @objc func swipeMoveDown() {
         isMoving = true
         debugPrint("swipedown")
         oldLady.moveDown()
+        isMoving = false
     }
     @objc func swipeMoveLeft() {
         isMoving = true
         oldLady.moveLeft()
         debugPrint("swipelefy")
+        isMoving = false
     }
     
     func touchDown(atPoint pos: CGPoint) {

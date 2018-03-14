@@ -29,7 +29,7 @@ enum SpriteSize {
     static let sickle = CGSize(width: 20, height: 30)
     static let bullet = CGSize(width: 10, height: 10)
     static let mushroom = CGSize(width: 20, height: 20)
-    static let button = CGSize(width: 50, height: 50)
+    static let button = CGSize(width: 250, height: 100)
 }
 
 enum Scores {
