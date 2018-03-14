@@ -64,14 +64,6 @@ class Player: SKSpriteNode {
         //        self.physicsBody?.contactTestBitMask = PhysicsMask.mushroom
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.restitution = 0.4
-        
-        
-        
-        
-        
-        
-        
-        
         self.position = plus(left: GameManager.shared.gameMatrix[0][3], right: playerPositionAdapted)
         squarePlayerPosition = (0,3)
         destination = position
@@ -227,7 +219,7 @@ class Player: SKSpriteNode {
                 self.xScale = fabs(self.xScale)
             }
             
-            self.animate(type: "idle")
+//            self.animate(type: "idle")
             //                  debugPrint("end dis \(distance)")
         }
     }
@@ -259,7 +251,7 @@ class Player: SKSpriteNode {
         default:
             textureType = textureIdle
         }
-        let animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 15.0))
+        let animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 5.0))
         self.run(SKAction.repeatForever(animation))
     }
     

@@ -4,7 +4,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Actors
     let oldLady = Player()
-    let zombieMovePointsPerSec: CGFloat = 480.0
+//    let zombieMovePointsPerSec: CGFloat = 480.0
     var velocity = CGPoint.zero
     
     
