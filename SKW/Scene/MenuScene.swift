@@ -18,22 +18,17 @@ class MenuScene: SKScene {
     backgroundColor = .white
 
     let background = SKSpriteNode(imageNamed: "backgroundMenuScene")
-    background.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
+    background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+
+    background.scale(to: view.frame.size)
     background.zPosition = Z.background
     addChild(background)
 
     playBackgroundMusic(filename: "menuAudio.mp3")
 
-    let gameLabel = SKLabelNode(fontNamed: "Courier")
-    gameLabel.fontSize = 40
-    gameLabel.fontColor = .red
-    gameLabel.text = "UnNamed"
-    gameLabel.position = CGPoint(x: size.width / 2, y: size.height / 1.2)
-    addChild(gameLabel)
-
     let buttonStart = SKSpriteNode(imageNamed: "start")
     buttonStart.name = "buttonStart"
-    buttonStart.position = CGPoint(x: size.width / 2, y: size.height / 2.8)
+    buttonStart.position = CGPoint(x: view.frame.midX + ( size.width / 4 ), y: size.height / 2)
     buttonStart.size = SpriteSize.button
     buttonStart.zPosition = Z.HUD
     addChild(buttonStart)
