@@ -219,7 +219,7 @@ class Player: SKSpriteNode {
                 self.xScale = fabs(self.xScale)
             }
             
-//            self.animate(type: "idle")
+            self.animate(type: "idle")
             //                  debugPrint("end dis \(distance)")
         }
     }
