@@ -10,6 +10,7 @@ import Foundation
 import AVFoundation
 import SpriteKit
 
+
 var backgroundMusicPlayer: AVAudioPlayer!
 
 let alarm = SKAudioNode(fileNamed: "scene1Audio.mp3")
