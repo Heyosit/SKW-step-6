@@ -16,6 +16,7 @@ class Tomb: SKSpriteNode {
   init() {
     super.init(texture: textureIdle, color: .white, size: SpriteSize.tomb)
     self.name = "tomb"
+    self.zPosition = 20
 
     // Physics
 //    self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)

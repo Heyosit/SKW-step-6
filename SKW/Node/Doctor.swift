@@ -13,14 +13,18 @@ class Doctor: SKSpriteNode {
     
 //    let textureIdle = SKTexture(imageNamed: "brick")
     var textureWalk: [SKTexture] = []
+    var doctorPositionAdapted =  CGPoint()
+    let spacing = CGPoint(x: 5.0, y: 5)
     
     init() {
         
         self.textureWalk = GameManager.shared.allTextures.filter { $0.description.contains("doctor-walk") }
         super.init(texture: textureWalk[0], color: .white, size: SpriteSize.doctor)
         self.name = "doctor"
-        
-        
+        doctorPositionAdapted = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+//        debugPrint("player pos: \(playerPositionAdapted)")
+        self.zPosition = 50
+        doctorPositionAdapted = plus(left: doctorPositionAdapted, right: spacing)
         
         // Physics
         //    self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
@@ -29,7 +33,32 @@ class Doctor: SKSpriteNode {
         //    self.physicsBody!.contactTestBitMask = PhysicsMask.bullet
         //    self.physicsBody!.collisionBitMask = 0
     }
-    func setup(){
+    
+    func setup(view: SKView){
+        let randI = Int(arc4random_uniform(4))
+        var prova = GameManager.shared.gameMatrix[randI][0]
+        
+        self.position = CGPoint (x: view.frame.maxX + 50, y: prova.y )
+        self.position = plus(left: self.position, right: doctorPositionAdapted)
+        moveDoctor()
+        
+        
+        
+    }
+    
+    func moveDoctor(){
+        let walkAnim = SKAction.run {
+            self.animate(type: "walk")
+            self.xScale = fabs(self.xScale) * -1.0
+        }
+        let doctorAction = SKAction.sequence([
+            walkAnim,
+            SKAction.moveTo(x: 0 - 50, duration: 6),
+            SKAction.wait(forDuration: 0.2),
+            SKAction.removeFromParent()
+            ])
+        self.run(doctorAction)
+        
         
     }
     
@@ -74,6 +103,33 @@ class Doctor: SKSpriteNode {
     // Swift requires this initializer
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func animate(type: String) {
+        var textureType: [SKTexture]
+        let animation: SKAction
+        switch type {
+//        case "idle":
+//            textureType = textureIdle
+//            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 3.0))
+        case "walk":
+            textureType = textureWalk
+            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 12.0))
+//        case "attack":
+//            textureType = textureAttack
+//            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 12.0))
+//            //        case "fire":
+//            //            textureType = textureFire
+            //    case "beam":
+        //      textureType = textureBeam
+        default:
+            textureType = textureWalk
+            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 3.0))
+        }
+        
+        
+        
+        self.run(SKAction.repeatForever(animation))
     }
     
 }

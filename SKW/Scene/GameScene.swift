@@ -5,6 +5,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Actors
     let oldLady = Player()
     var tomb = [Tomb]()
+    var doctor = Doctor()
     
     var velocity = CGPoint.zero
     
@@ -48,6 +49,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
         //        oldLady.zPosition = 1
         addChild(oldLady)
+        
+        doctor.setup(view: self.view!)
+//        doctor.zPosition = 100
+        //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
+        //        oldLady.zPosition = 1
+        addChild(doctor)
         
         spawnTombs()
         
@@ -147,6 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = currentTime
         
         oldLady.update(deltaTime: dt)
+        
         
         //        checkSimpleCollision()
         
