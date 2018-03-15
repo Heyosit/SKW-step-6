@@ -14,15 +14,15 @@ class Enemy: SKSpriteNode {
   let textureMushroomBad = SKTexture(imageNamed: "mushroom-bad")
 
   init() {
-    super.init(texture: textureIdle, color: .clear, size: SpriteSize.enemy)
+    super.init(texture: textureIdle, color: .white, size: SpriteSize.enemy)
     self.name = "enemy"
 
     // Physics
-    self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
-    self.physicsBody!.isDynamic = false
-    self.physicsBody!.categoryBitMask = PhysicsMask.enemy
-    self.physicsBody!.contactTestBitMask = PhysicsMask.bullet
-    self.physicsBody!.collisionBitMask = 0
+//    self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
+//    self.physicsBody!.isDynamic = false
+//    self.physicsBody!.categoryBitMask = PhysicsMask.enemy
+//    self.physicsBody!.contactTestBitMask = PhysicsMask.bullet
+//    self.physicsBody!.collisionBitMask = 0
   }
 
   func spawnMushroom() {

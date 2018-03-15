@@ -133,22 +133,28 @@ class Player: SKSpriteNode {
         
         
     }
+    
+    func canMoveOnPosition(iPlayerPos: Int, jPlayerPos: Int) -> Bool{
+        for i in 0...3{
+            debugPrint("player pos i: \(iPlayerPos), j: \(jPlayerPos)")
+            debugPrint("pos enemy i: \(GameManager.shared.enemyPosIndex[i].i), j: \(GameManager.shared.enemyPosIndex[i].j)")
+            if (GameManager.shared.enemyPosIndex[i].i == iPlayerPos && GameManager.shared.enemyPosIndex[i].j == jPlayerPos){
+                return false
+            }
+        }
+        return true
+    }
+    
     func moveRight(){
         if !attacking{
+            if canMoveOnPosition(iPlayerPos: squarePlayerPosition.0, jPlayerPos: squarePlayerPosition.1 + 2){
+                
+            
             if squarePlayerPosition.1 < GameManager.shared.maxColums - 1 - (squarePlayerPosition.0 )
             {
+                
                 debugPrint("squareplayer: \(squarePlayerPosition)")
                 debugPrint("destination: \(GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])")
-                //                let orientation: CGFloat =  1.0
-                //                self.xScale = fabs(self.xScale) * orientation
-                //
-                //                // Interpolation
-                //                let animWalk = SKAction.run { self.animate(type: "walk") }
-                //                let move = SKAction.moveTo(x: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1].x, duration: 0.3)
-                //                move.timingMode = .easeOut
-                //                let animIdle = SKAction.run { self.animate(type: "idle") }
-                //                let animation = SKAction.sequence([animWalk, move, animIdle])
-                //                self.run(animation)
                 setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])
                 squarePlayerPosition.1 += 1
             }else {
@@ -166,12 +172,14 @@ class Player: SKSpriteNode {
                 //
                 //                self.run(jumpSequence)
             }
+            }
         }
         
         
     }
     func moveLeft(){
         if !attacking{
+            if canMoveOnPosition(iPlayerPos: squarePlayerPosition.0, jPlayerPos: squarePlayerPosition.1 ){
             if squarePlayerPosition.1 > (GameManager.shared.maxRows - squarePlayerPosition.0 - 1)
             {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
@@ -193,10 +201,12 @@ class Player: SKSpriteNode {
                 debugPrint("will not move left")
             }
         }
+        }
     }
     
     func moveDown(){
         if !attacking{
+            if canMoveOnPosition(iPlayerPos: squarePlayerPosition.0 - 1, jPlayerPos: squarePlayerPosition.1 + 2){
             if squarePlayerPosition.0 > 0
             {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
@@ -219,10 +229,12 @@ class Player: SKSpriteNode {
                 debugPrint("will not move down")
             }
         }
+        }
         
     }
     func moveUp(){
         if !attacking{
+            if canMoveOnPosition(iPlayerPos: squarePlayerPosition.0 + 1, jPlayerPos: squarePlayerPosition.1){
             if squarePlayerPosition.0 < 3
             {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
@@ -235,6 +247,7 @@ class Player: SKSpriteNode {
                 debugPrint("squareplayer: \(squarePlayerPosition)")
                 debugPrint("will not move up")
             }
+        }
         }
     }
     
@@ -260,10 +273,10 @@ class Player: SKSpriteNode {
                 isIdle = true
             }
             let distance = CGPoint(x: fabs(destination.x - position.x), y: fabs(destination.y - position.y))
-            debugPrint("distance: \(distance)")
+//            debugPrint("distance: \(distance)")
             //        let difference = fabs(lastDistance.x - distance.x)
             if distance.x == lastDistance.x{
-                debugPrint("sono nell if")
+//                debugPrint("sono nell if")
                 if firstTime{
                     firstTime = false
                     isIdle = false
@@ -304,7 +317,7 @@ class Player: SKSpriteNode {
                     }
                     //                isIdle = false
                     
-                    debugPrint("end dis \(distance)")
+//                    debugPrint("end dis \(distance)")
                 }
             }
         }
@@ -352,9 +365,7 @@ class Player: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func plus(left: CGPoint, right: CGPoint) -> CGPoint{
-        return CGPoint(x: left.x + right.x, y: left.y + right.y)
-    }
+    
     
 }
 

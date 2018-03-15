@@ -14,6 +14,10 @@ class GameManager {
     var appCounted: Bool = false
     var monstersKills: Int = 0
     var timerCounter: Int = 30
+    var enemyPosIndex: [(i: Int, j: Int)] = [(0,7),
+                         (1,4),
+                         (2,10),
+                         (3,6)]
     
     // Textures
     var allTextures: [SKTexture] = []
@@ -50,5 +54,9 @@ class GameManager {
             }
         }
         
-    }}
+    }
+    
+    
+    
+}
 

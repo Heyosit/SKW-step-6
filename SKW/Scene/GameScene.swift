@@ -4,6 +4,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Actors
     let oldLady = Player()
+    var enemy = [Enemy]()
+    
     var velocity = CGPoint.zero
     
     
@@ -46,6 +48,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
         //        oldLady.zPosition = 1
         addChild(oldLady)
+        
+        spawnEnemies()
         
         
         
@@ -145,6 +149,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         oldLady.update(deltaTime: dt)
         
         //        checkSimpleCollision()
+        
+    }
+    
+    func spawnEnemies(){
+        enemy.removeAll()
+        
+        for count in 0...3{
+//            debugPrint("count: \(count)")
+            var newEnemy = Enemy()
+            var posAdpt = CGPoint(x:  0, y:  newEnemy.size.height / 2)
+            var i = GameManager.shared.enemyPosIndex[count].0
+//            debugPrint("i: \(i)")
+            var j = GameManager.shared.enemyPosIndex[count].1
+//            debugPrint("j: \(j)")
+            newEnemy.position = plus(left: GameManager.shared.gameMatrix[i][j], right: posAdpt)
+            
+            addChild(newEnemy)
+            
+        }
+        
         
     }
     
