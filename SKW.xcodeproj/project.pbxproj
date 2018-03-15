@@ -17,7 +17,7 @@
 		5F7AA90F20484BF60029E5AA /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA90E20484BF60029E5AA /* Background.swift */; };
 		5F7AA9112048A1040029E5AA /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA9102048A1040029E5AA /* GameManager.swift */; };
 		5F7AA9132048A6DA0029E5AA /* EndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA9122048A6DA0029E5AA /* EndScene.swift */; };
-		5F7AA915204ABC480029E5AA /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA914204ABC480029E5AA /* Enemy.swift */; };
+		5F7AA915204ABC480029E5AA /* Tomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA914204ABC480029E5AA /* Tomb.swift */; };
 		5F89506E204D27AD00F07123 /* fire.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F895068204D27AD00F07123 /* fire.m4a */; };
 		5F89506F204D27AD00F07123 /* good.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F895069204D27AD00F07123 /* good.m4a */; };
 		5F895070204D27AD00F07123 /* beam.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5F89506A204D27AD00F07123 /* beam.wav */; };
@@ -46,7 +46,7 @@
 		5F7AA90E20484BF60029E5AA /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		5F7AA9102048A1040029E5AA /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		5F7AA9122048A6DA0029E5AA /* EndScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScene.swift; sourceTree = "<group>"; };
-		5F7AA914204ABC480029E5AA /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		5F7AA914204ABC480029E5AA /* Tomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tomb.swift; sourceTree = "<group>"; };
 		5F895068204D27AD00F07123 /* fire.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = fire.m4a; sourceTree = "<group>"; };
 		5F895069204D27AD00F07123 /* good.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = good.m4a; sourceTree = "<group>"; };
 		5F89506A204D27AD00F07123 /* beam.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beam.wav; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			children = (
 				5F995B142048015B00B4FDC8 /* HUD.swift */,
 				5F995B122047F26400B4FDC8 /* Player.swift */,
-				5F7AA914204ABC480029E5AA /* Enemy.swift */,
+				5F7AA914204ABC480029E5AA /* Tomb.swift */,
 				5F7AA90E20484BF60029E5AA /* Background.swift */,
 			);
 			path = Node;
@@ -253,7 +253,7 @@
 				5F995B132047F26400B4FDC8 /* Player.swift in Sources */,
 				5F7AA9112048A1040029E5AA /* GameManager.swift in Sources */,
 				5F995B152048015B00B4FDC8 /* HUD.swift in Sources */,
-				5F7AA915204ABC480029E5AA /* Enemy.swift in Sources */,
+				5F7AA915204ABC480029E5AA /* Tomb.swift in Sources */,
 				15DFB5422059E62C0041B3B2 /* Functions.swift in Sources */,
 				5FB36C17203E1BE000AD3F10 /* GameScene.swift in Sources */,
 				5F7AA9132048A6DA0029E5AA /* EndScene.swift in Sources */,

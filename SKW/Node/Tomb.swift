@@ -7,15 +7,15 @@
 
 import SpriteKit
 
-class Enemy: SKSpriteNode {
+class Tomb: SKSpriteNode {
 
   let textureIdle = SKTexture(imageNamed: "brick")
   let textureMushroomGood = SKTexture(imageNamed: "mushroom-good")
   let textureMushroomBad = SKTexture(imageNamed: "mushroom-bad")
 
   init() {
-    super.init(texture: textureIdle, color: .white, size: SpriteSize.enemy)
-    self.name = "enemy"
+    super.init(texture: textureIdle, color: .white, size: SpriteSize.tomb)
+    self.name = "tomb"
 
     // Physics
 //    self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)

@@ -4,7 +4,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Actors
     let oldLady = Player()
-    var enemy = [Enemy]()
+    var tomb = [Tomb]()
     
     var velocity = CGPoint.zero
     
@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        oldLady.zPosition = 1
         addChild(oldLady)
         
-        spawnEnemies()
+        spawnTombs()
         
         
         
@@ -152,20 +152,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func spawnEnemies(){
-        enemy.removeAll()
+    func spawnTombs(){
+        tomb.removeAll()
         
         for count in 0...3{
 //            debugPrint("count: \(count)")
-            var newEnemy = Enemy()
-            var posAdpt = CGPoint(x:  0, y:  newEnemy.size.height / 2)
-            var i = GameManager.shared.enemyPosIndex[count].0
+            let newTomb = Tomb()
+            let posAdpt = CGPoint(x:  0, y:  newTomb.size.height / 2)
+            let i = GameManager.shared.tombsPosIndex[count].0
 //            debugPrint("i: \(i)")
-            var j = GameManager.shared.enemyPosIndex[count].1
+            var j = GameManager.shared.tombsPosIndex[count].1
 //            debugPrint("j: \(j)")
-            newEnemy.position = plus(left: GameManager.shared.gameMatrix[i][j], right: posAdpt)
+            newTomb.position = plus(left: GameManager.shared.gameMatrix[i][j], right: posAdpt)
             
-            addChild(newEnemy)
+            addChild(newTomb)
             
         }
         
