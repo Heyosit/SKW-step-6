@@ -9,10 +9,9 @@ import SpriteKit
 
 class HUD: SKNode {
 
-  let scoreLabel = SKLabelNode(fontNamed:"Courier")
-  let timerLabel = SKLabelNode(fontNamed:"Courier")
-  let buttonFire = SKSpriteNode(imageNamed: "buttonFire-normal")
-
+  let scoreLabel = SKLabelNode(fontNamed:"Bradley Hand")
+  let timerLabel = SKLabelNode(fontNamed:"Bradley Hand")
+    
   var score: Int {
     get {
       return GameManager.shared.score
@@ -25,34 +24,31 @@ class HUD: SKNode {
   
   override init() {
     super.init()
+    
     self.name = "HUD"
+    
 
     scoreLabel.text = "Score: 0"
     scoreLabel.fontSize = 20
     scoreLabel.zPosition = Z.HUD
+    
 
     timerLabel.text = "Timer: 30"
     timerLabel.fontSize = 20
     timerLabel.zPosition = Z.HUD
-
-    buttonFire.name = "buttonFire"
-    buttonFire.anchorPoint = CGPoint.zero
-    buttonFire.zPosition = Z.HUD
+    
   }
 
   func setup(size: CGSize) {
     let spacing: CGFloat = 10
     scoreLabel.horizontalAlignmentMode = .left
-    scoreLabel.position = CGPoint(x: spacing, y: size.height - scoreLabel.frame.height - spacing)
+    scoreLabel.position = CGPoint(x: spacing + 100, y: size.height - scoreLabel.frame.height - spacing)
     addChild(scoreLabel)
 
     timerLabel.horizontalAlignmentMode = .right
-    timerLabel.position = CGPoint(x: size.width - spacing, y: size.height - timerLabel.frame.height - spacing)
+    timerLabel.position = CGPoint(x: size.width - 100, y: size.height - timerLabel.frame.height - spacing)
     addChild(timerLabel)
 
-    buttonFire.position = CGPoint(x: 10, y: 10)
-    buttonFire.size = SpriteSize.button
-    addChild(buttonFire)
   }
 
   required init?(coder aDecoder: NSCoder) {

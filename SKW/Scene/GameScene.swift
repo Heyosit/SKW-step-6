@@ -49,6 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
         //        oldLady.zPosition = 1
         addChild(oldLady)
+    
+        hud.setup(size: size)
+        addChild(hud)
         
         doctor.setup(view: self.view!)
 //        doctor.zPosition = 100
