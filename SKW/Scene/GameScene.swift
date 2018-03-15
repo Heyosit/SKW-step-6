@@ -5,6 +5,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Actors
     let oldLady = Player()
     var tomb = [Tomb]()
+    var hud = HUD()
     
     var velocity = CGPoint.zero
     
@@ -48,6 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
         //        oldLady.zPosition = 1
         addChild(oldLady)
+    
+        hud.setup(size: size)
+        addChild(hud)
         
         spawnTombs()
         
