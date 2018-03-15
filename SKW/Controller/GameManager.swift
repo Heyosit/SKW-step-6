@@ -15,10 +15,18 @@ class GameManager {
     var doctorIsIn = false
     var monstersKills: Int = 0
     var timerCounter: Int = 30
-    var tombsPosIndex: [(i: Int, j: Int)] = [(0,7),
-                         (1,4),
-                         (2,10),
-                         (3,6)]
+    
+    var timer: Timer? {
+        willSet {
+            timer?.invalidate()
+            timerCounter = 30
+        }
+    }
+    
+    var tombsPosIndex: [(i: Int, j: Int)] = [(0,0),
+                         (0,0),
+                         (0,0),
+                         (0,0)]
     
     // Textures
     var allTextures: [SKTexture] = []
@@ -56,6 +64,19 @@ class GameManager {
         }
         
     }
+    
+    // Start Timer in Singleton thread
+    func startTimer(label: SKLabelNode) {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { t in
+            self.timerCounter -= 1
+            label.text = "Timer: \(self.timerCounter)"
+        })
+    }
+    
+    func loseTime(label: SKLabelNode) {
+        timerCounter -= 2
+            label.text = "Timer: \(self.timerCounter)"
+        }
     
     
     

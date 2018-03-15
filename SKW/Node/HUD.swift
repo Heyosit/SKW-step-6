@@ -18,6 +18,10 @@ class HUD: SKNode {
     }
     set {
       GameManager.shared.score += newValue
+        if (GameManager.shared.score < 0)
+        {
+            GameManager.shared.score = 0
+        }
       scoreLabel.text = "Score: \(GameManager.shared.score)"
     }
   }

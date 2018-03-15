@@ -34,7 +34,8 @@ enum SpriteSize {
 }
 
 enum Scores {
-    
+    static let bonus = 10
+    static let malus = -10
 }
 
 

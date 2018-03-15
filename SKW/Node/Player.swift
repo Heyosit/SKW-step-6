@@ -72,7 +72,7 @@ class Player: SKSpriteNode {
         //set position
         self.position = plus(left: GameManager.shared.gameMatrix[0][3], right: playerPositionAdapted)
         squarePlayerPosition = (0,3)
-        self.zPosition = CGFloat(squarePlayerPosition.0)
+        self.zPosition = CGFloat(GameManager.shared.maxRows - squarePlayerPosition.0)
         destination = position
         
         self.animate(type: "idle")
@@ -183,7 +183,7 @@ class Player: SKSpriteNode {
                     debugPrint("destination: \(GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])")
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])
                     squarePlayerPosition.1 += 1
-                    self.zPosition = CGFloat(squarePlayerPosition.0)
+                    self.zPosition = CGFloat(GameManager.shared.maxRows - squarePlayerPosition.0)
                     debugPrint("player zposition: \(self.zPosition)")
                 }else {
                     //                isBouncing = true
@@ -224,7 +224,7 @@ class Player: SKSpriteNode {
                     //                self.run(animation)
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1])
                     squarePlayerPosition.1 -= 1
-                    self.zPosition = CGFloat(squarePlayerPosition.0)
+                    self.zPosition = CGFloat(GameManager.shared.maxRows - squarePlayerPosition.0)
                 }else {
                     debugPrint("squareplayer: \(squarePlayerPosition)")
                     debugPrint("will not move left")
@@ -253,7 +253,7 @@ class Player: SKSpriteNode {
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 - 1][squarePlayerPosition.1 + 1])
                     squarePlayerPosition.0 -= 1
                     squarePlayerPosition.1 += 1
-                    self.zPosition = CGFloat(squarePlayerPosition.0)
+                    self.zPosition = CGFloat(GameManager.shared.maxRows - squarePlayerPosition.0)
                 }else {
                     debugPrint("squareplayer: \(squarePlayerPosition)")
                     debugPrint("will not move down")
@@ -272,7 +272,7 @@ class Player: SKSpriteNode {
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 + 1][squarePlayerPosition.1 - 1])
                     squarePlayerPosition.0 += 1
                     squarePlayerPosition.1 -= 1
-                    self.zPosition = CGFloat(squarePlayerPosition.0)
+                    self.zPosition = CGFloat(GameManager.shared.maxRows - squarePlayerPosition.0)
                 }else {
                     
                     debugPrint("squareplayer: \(squarePlayerPosition)")

@@ -4,7 +4,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Actors
     let oldLady = Player()
-    var tomb = [Tomb]()
+    
 //    var doctor = Doctor()
     var hud = HUD()
     
@@ -18,6 +18,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Special
     var isMoving = false
+    
+    //tombNumber
+    var tombCount = 0
 
     override func sceneDidLoad() {
         self.physicsWorld.contactDelegate = self
@@ -47,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Player
         debugPrint( GameManager.shared.setup)
         oldLady.setup(view: self.view!)
-        oldLady.zPosition = 100
+//        oldLady.zPosition = 100
         //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
         //        oldLady.zPosition = 1
         addChild(oldLady)
@@ -57,7 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        spawnTombs()
+//        spawnTombs()
+        
+        //start Game
+        GameManager.shared.startTimer(label: hud.timerLabel)
         
         
         
@@ -162,7 +168,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         
         oldLady.update(deltaTime: dt)
-        checkSimpleCollision()
+        checkPlayerDoctorCollision()
+        checkTombDoctorCollision()
+        spawnTombs()
         
         
         //        checkSimpleCollision()
@@ -176,7 +184,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    func checkSimpleCollision() {
+    func checkPlayerDoctorCollision() {
         enumerateChildNodes(withName: "doctor") { doc, stop in
             self.enumerateChildNodes(withName: "player") { player, stop in
                 if player.frame.intersects(doc.frame) {
@@ -186,6 +194,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         //                    doc?.doctorHitPlayer()
                                             doc.removeFromParent()
                                             GameManager.shared.doctorIsIn = false
+                        GameManager.shared.loseTime(label: self.hud.timerLabel)
                         self.oldLady.playerBeHit()
                     }
                     
@@ -193,25 +202,68 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    func spawnTombs(){
-        tomb.removeAll()
-        
-        for count in 0...3{
-//            debugPrint("count: \(count)")
-            let newTomb = Tomb()
-            let posAdpt = CGPoint(x:  0, y:  newTomb.size.height / 2)
-            let i = GameManager.shared.tombsPosIndex[count].0
-//            debugPrint("i: \(i)")
-            var j = GameManager.shared.tombsPosIndex[count].1
-//            debugPrint("j: \(j)")
-            newTomb.position = plus(left: GameManager.shared.gameMatrix[i][j], right: posAdpt)
-            
-            addChild(newTomb)
-            
+    
+    func checkTombDoctorCollision() {
+        enumerateChildNodes(withName: "doctor") { doc, stop in
+            self.enumerateChildNodes(withName: "tomb") { tomb, stop in
+                if tomb.frame.intersects(doc.frame) {
+                    if tomb.zPosition == doc.zPosition{
+                        debugPrint("tomb and doctor Intersected!")
+                        //                    let doc = doctor as? Doctor
+                        //                    doc?.doctorHitPlayer()
+                        doc.removeFromParent()
+                        GameManager.shared.doctorIsIn = false
+                        tomb.removeFromParent()
+                        self.tombCount -= 1
+                        self.hud.score = Scores.malus
+                        GameManager.shared.loseTime(label: self.hud.timerLabel)
+                    }
+                    
+                }
+            }
         }
+    }
+    
+//    func spawnTombs(){
+//
+//        for count in 0...3{
+////            debugPrint("count: \(count)")
+//            let newTomb = Tomb()
+//            let posAdpt = CGPoint(x:  0, y:  newTomb.size.height / 2)
+//            let i = GameManager.shared.tombsPosIndex[count].0
+////            debugPrint("i: \(i)")
+//            var j = GameManager.shared.tombsPosIndex[count].1
+////            debugPrint("j: \(j)")
+//            newTomb.position = plus(left: GameManager.shared.gameMatrix[i][j], right: posAdpt)
+//            newTomb.zPosition = CGFloat(GameManager.shared.maxRows - count)
+//
+//            addChild(newTomb)
+//
+//        }
+//    }
+    
+    func spawnTombs(){
         
+        if tombCount <= 3
+        {
+            
         
+        let newTomb = Tomb()
+        let posAdpt = CGPoint(x:  0, y:  newTomb.size.height / 2)
+        let i = arc4random_uniform(UInt32(GameManager.shared.maxRows))
+        //            debugPrint("i: \(i)")
+        var partJ = UInt32(GameManager.shared.maxRows) - i + 1
+            var secondPartJ = UInt32(GameManager.shared.maxColums) - (UInt32(GameManager.shared.maxRows) + i)
+        var j = arc4random_uniform(secondPartJ) + partJ
+        //            debugPrint("j: \(j)")
+            debugPrint("i: \(i), j: \(j)")
+        newTomb.position = plus(left: GameManager.shared.gameMatrix[Int(i)][Int(j)], right: posAdpt)
+        newTomb.zPosition = CGFloat(GameManager.shared.maxRows - Int(i))
+        tombCount += 1
         
+//            GameManager.shared.tombsPosIndex
+        addChild(newTomb)
+        }
         
     }
     

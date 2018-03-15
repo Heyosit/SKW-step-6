@@ -38,7 +38,7 @@ class Doctor: SKSpriteNode {
         let randI = Int(arc4random_uniform(4))
         let yPos = GameManager.shared.gameMatrix[randI][0].y
         
-        self.zPosition = CGFloat(randI)
+        self.zPosition = CGFloat(GameManager.shared.maxRows - randI)
         self.position = CGPoint (x: view.frame.maxX + self.size.width, y: yPos )
         self.position = plus(left: self.position, right: doctorPositionAdapted)
         moveDoctor()
