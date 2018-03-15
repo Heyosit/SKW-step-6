@@ -54,7 +54,6 @@ class Doctor: SKSpriteNode {
         let doctorAction = SKAction.sequence([
             walkAnim,
             SKAction.moveTo(x: 0 - 50, duration: 6),
-            SKAction.wait(forDuration: 0.2),
             SKAction.removeFromParent()
             ])
         self.run(doctorAction)

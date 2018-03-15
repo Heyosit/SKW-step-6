@@ -6,6 +6,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let oldLady = Player()
     var tomb = [Tomb]()
     var doctor = Doctor()
+    var hud = HUD()
     
     var velocity = CGPoint.zero
     
@@ -13,6 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Update Timer
     var lastUpdateTime: TimeInterval = 0
     var dt: TimeInterval = 0
+    var doctorCreationTime: TimeInterval = 0
     
     // Special
     var isMoving = false
@@ -53,11 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hud.setup(size: size)
         addChild(hud)
         
-        doctor.setup(view: self.view!)
-//        doctor.zPosition = 100
-        //        debugPrint("pos old lady: \(oldLady.squarePlayerPosition)")
-        //        oldLady.zPosition = 1
-        addChild(doctor)
+        
         
         spawnTombs()
         
@@ -156,12 +154,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Set last frame time to current time
         lastUpdateTime = currentTime
         
+        if currentTime > doctorCreationTime{
+            spawnDoctor()
+            doctorCreationTime = currentTime + 11.5
+        }
+        
         oldLady.update(deltaTime: dt)
         
         
         //        checkSimpleCollision()
         
     }
+    
+    func spawnDoctor(){
+        doctor.setup(view: self.view!)
+        addChild(doctor)
+    }
+    
+    
     
     func spawnTombs(){
         tomb.removeAll()
