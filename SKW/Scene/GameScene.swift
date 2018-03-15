@@ -7,7 +7,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
 //    var doctor = Doctor()
     var hud = HUD()
-    
     var velocity = CGPoint.zero
     
     
@@ -171,6 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         checkPlayerDoctorCollision()
         checkTombDoctorCollision()
         spawnTombs()
+        checkTimer()
         
         
         //        checkSimpleCollision()
@@ -298,6 +298,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+    }
+    
+    func checkTimer() {
+        if GameManager.shared.timerCounter <= 0 {
+            let scene = EndScene(size: size)
+            scene.scaleMode = .aspectFill
+            let transitionType = SKTransition.flipVertical(withDuration: 0.5)
+            view?.presentScene(scene, transition: transitionType)
+        }
     }
     
     //    override func update(_ currentTime: TimeInterval) {
