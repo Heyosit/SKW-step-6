@@ -36,9 +36,10 @@ class Doctor: SKSpriteNode {
     
     func setup(view: SKView){
         let randI = Int(arc4random_uniform(4))
-        var prova = GameManager.shared.gameMatrix[randI][0]
+        let yPos = GameManager.shared.gameMatrix[randI][0].y
         
-        self.position = CGPoint (x: view.frame.maxX + 50, y: prova.y )
+        self.zPosition = CGFloat(randI)
+        self.position = CGPoint (x: view.frame.maxX + self.size.width, y: yPos )
         self.position = plus(left: self.position, right: doctorPositionAdapted)
         moveDoctor()
         
@@ -47,17 +48,43 @@ class Doctor: SKSpriteNode {
     }
     
     func moveDoctor(){
+        debugPrint("doctor zPosition is: \(self.zPosition) ")
         let walkAnim = SKAction.run {
             self.animate(type: "walk")
             self.xScale = fabs(self.xScale) * -1.0
         }
+        let endAnim = SKAction.run {
+            GameManager.shared.doctorIsIn = false
+        }
         let doctorAction = SKAction.sequence([
             walkAnim,
-            SKAction.moveTo(x: 0 - 50, duration: 6),
-            SKAction.removeFromParent()
+            SKAction.moveTo(x: 0 - self.size.width, duration: 6),
+            SKAction.removeFromParent(),
+            endAnim
             ])
         self.run(doctorAction)
         
+        
+        
+    }
+    
+    func doctorHitPlayer(){
+        let animStart = SKAction.run {
+//            self.removeAllActions()
+            SKAction.fadeOut(withDuration: 1.5)
+        }
+       
+        let animEnd = SKAction.run {
+            
+            self.removeFromParent()
+            SKAction.wait(forDuration: 0.2)
+            GameManager.shared.doctorIsIn = false
+        }
+        let doctorLeave = SKAction.sequence([
+                animStart,
+                animEnd])
+        
+        self.run(doctorLeave)
         
     }
     

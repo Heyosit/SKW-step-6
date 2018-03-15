@@ -12,6 +12,7 @@ class GameManager {
     
     var score: Int = 0
     var appCounted: Bool = false
+    var doctorIsIn = false
     var monstersKills: Int = 0
     var timerCounter: Int = 30
     var tombsPosIndex: [(i: Int, j: Int)] = [(0,7),

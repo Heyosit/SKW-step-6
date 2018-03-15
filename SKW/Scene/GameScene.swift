@@ -5,7 +5,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Actors
     let oldLady = Player()
     var tomb = [Tomb]()
-    var doctor = Doctor()
+//    var doctor = Doctor()
     var hud = HUD()
     
     var velocity = CGPoint.zero
@@ -153,13 +153,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Set last frame time to current time
         lastUpdateTime = currentTime
-        
-        if currentTime > doctorCreationTime{
+//        if currentTime > doctorCreationTime{
+        if !GameManager.shared.doctorIsIn{
+            GameManager.shared.doctorIsIn = true
             spawnDoctor()
-            doctorCreationTime = currentTime + 11.5
+//            doctorCreationTime = currentTime + 11.5
         }
+
         
         oldLady.update(deltaTime: dt)
+        checkSimpleCollision()
         
         
         //        checkSimpleCollision()
@@ -167,12 +170,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnDoctor(){
+        let doctor = Doctor()
         doctor.setup(view: self.view!)
         addChild(doctor)
     }
     
     
-    
+    func checkSimpleCollision() {
+        enumerateChildNodes(withName: "doctor") { doc, stop in
+            self.enumerateChildNodes(withName: "player") { player, stop in
+                if player.frame.intersects(doc.frame) {
+                    if player.zPosition == doc.zPosition{
+                        debugPrint("player and doctor Intersected!")
+                        //                    let doc = doctor as? Doctor
+                        //                    doc?.doctorHitPlayer()
+                                            doc.removeFromParent()
+                                            GameManager.shared.doctorIsIn = false
+                        self.oldLady.playerBeHit()
+                    }
+                    
+                }
+            }
+        }
+    }
     func spawnTombs(){
         tomb.removeAll()
         
@@ -189,6 +209,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(newTomb)
             
         }
+        
+        
         
         
     }

@@ -72,9 +72,27 @@ class Player: SKSpriteNode {
         //set position
         self.position = plus(left: GameManager.shared.gameMatrix[0][3], right: playerPositionAdapted)
         squarePlayerPosition = (0,3)
+        self.zPosition = CGFloat(squarePlayerPosition.0)
         destination = position
         
         self.animate(type: "idle")
+    }
+    
+    func playerBeHit(){
+        let animStart = SKAction.run {
+//            self.removeAllActions()
+            SKAction.fadeOut(withDuration: 1)
+            SKAction.fadeIn(withDuration: 1)
+        }
+        let animEnd = SKAction.run {
+            self.animate(type: "idle")
+        }
+        let playerHitAnim = SKAction.sequence([
+            SKAction.repeat(animStart, count: 5),
+            animStart,
+            animEnd])
+        
+        self.run(playerHitAnim)
     }
     
     func attack(){
@@ -144,8 +162,8 @@ class Player: SKSpriteNode {
         
         //check if the player is not going on a tomb
         for i in 0...3{
-            debugPrint("player pos i: \(iPlayerPos), j: \(jPlayerPos)")
-            debugPrint("pos enemy i: \(GameManager.shared.tombsPosIndex[i].i), j: \(GameManager.shared.tombsPosIndex[i].j)")
+//            debugPrint("player pos i: \(iPlayerPos), j: \(jPlayerPos)")
+//            debugPrint("pos enemy i: \(GameManager.shared.tombsPosIndex[i].i), j: \(GameManager.shared.tombsPosIndex[i].j)")
             if (GameManager.shared.tombsPosIndex[i].i == iPlayerPos && GameManager.shared.tombsPosIndex[i].j == jPlayerPos){
                 return false
             }
@@ -165,6 +183,8 @@ class Player: SKSpriteNode {
                     debugPrint("destination: \(GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])")
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 + 1])
                     squarePlayerPosition.1 += 1
+                    self.zPosition = CGFloat(squarePlayerPosition.0)
+                    debugPrint("player zposition: \(self.zPosition)")
                 }else {
                     //                isBouncing = true
                     //                debugPrint("squareplayer: \(squarePlayerPosition)")
@@ -204,6 +224,7 @@ class Player: SKSpriteNode {
                     //                self.run(animation)
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 ][squarePlayerPosition.1 - 1])
                     squarePlayerPosition.1 -= 1
+                    self.zPosition = CGFloat(squarePlayerPosition.0)
                 }else {
                     debugPrint("squareplayer: \(squarePlayerPosition)")
                     debugPrint("will not move left")
@@ -232,6 +253,7 @@ class Player: SKSpriteNode {
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 - 1][squarePlayerPosition.1 + 1])
                     squarePlayerPosition.0 -= 1
                     squarePlayerPosition.1 += 1
+                    self.zPosition = CGFloat(squarePlayerPosition.0)
                 }else {
                     debugPrint("squareplayer: \(squarePlayerPosition)")
                     debugPrint("will not move down")
@@ -250,6 +272,7 @@ class Player: SKSpriteNode {
                     setDestination(destination: GameManager.shared.gameMatrix[squarePlayerPosition.0 + 1][squarePlayerPosition.1 - 1])
                     squarePlayerPosition.0 += 1
                     squarePlayerPosition.1 -= 1
+                    self.zPosition = CGFloat(squarePlayerPosition.0)
                 }else {
                     
                     debugPrint("squareplayer: \(squarePlayerPosition)")
@@ -274,6 +297,7 @@ class Player: SKSpriteNode {
                 self.animate(type: "idle")
                 self.xScale = fabs(self.xScale)
                 isIdle = true
+                self.playerBeHit()
             }
             // Calculate Distance
             let distance = CGPoint(x: fabs(destination.x - position.x), y: fabs(destination.y - position.y))
