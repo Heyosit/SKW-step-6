@@ -38,9 +38,9 @@ class Player: SKSpriteNode {
     init() {
         
         
-        self.textureIdle = GameManager.shared.allTextures.filter { $0.description.contains("idle") }
-        self.textureWalk = GameManager.shared.allTextures.filter { $0.description.contains("walk") }
-        self.textureAttack = GameManager.shared.allTextures.filter { $0.description.contains("attack") }
+        self.textureIdle = GameManager.shared.allTextures.filter { $0.description.contains("player-idle") }
+        self.textureWalk = GameManager.shared.allTextures.filter { $0.description.contains("player-walk") }
+        self.textureAttack = GameManager.shared.allTextures.filter { $0.description.contains("player-attack") }
         
         
         

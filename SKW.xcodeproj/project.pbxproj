@@ -12,6 +12,7 @@
 		15D455E4205929020073CCB4 /* scene1Audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15D455E1205929010073CCB4 /* scene1Audio.mp3 */; };
 		15D455E5205929020073CCB4 /* startScream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15D455E2205929010073CCB4 /* startScream.mp3 */; };
 		15DFB5422059E62C0041B3B2 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFB5412059E62C0041B3B2 /* Functions.swift */; };
+		15DFB544205A8E660041B3B2 /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFB543205A8E660041B3B2 /* Doctor.swift */; };
 		5F3935CB204CA59600AEC461 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5F3935CA204CA59600AEC461 /* Sprites.atlas */; };
 		5F7AA90D20484ACE0029E5AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA90C20484ACE0029E5AA /* Constants.swift */; };
 		5F7AA90F20484BF60029E5AA /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA90E20484BF60029E5AA /* Background.swift */; };
@@ -41,6 +42,7 @@
 		15D455E1205929010073CCB4 /* scene1Audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scene1Audio.mp3; sourceTree = "<group>"; };
 		15D455E2205929010073CCB4 /* startScream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startScream.mp3; sourceTree = "<group>"; };
 		15DFB5412059E62C0041B3B2 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		15DFB543205A8E660041B3B2 /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		5F3935CA204CA59600AEC461 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = SOURCE_ROOT; };
 		5F7AA90C20484ACE0029E5AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5F7AA90E20484BF60029E5AA /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				5F995B122047F26400B4FDC8 /* Player.swift */,
 				5F7AA914204ABC480029E5AA /* Tomb.swift */,
 				5F7AA90E20484BF60029E5AA /* Background.swift */,
+				15DFB543205A8E660041B3B2 /* Doctor.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				5F995B152048015B00B4FDC8 /* HUD.swift in Sources */,
 				5F7AA915204ABC480029E5AA /* Tomb.swift in Sources */,
 				15DFB5422059E62C0041B3B2 /* Functions.swift in Sources */,
+				15DFB544205A8E660041B3B2 /* Doctor.swift in Sources */,
 				5FB36C17203E1BE000AD3F10 /* GameScene.swift in Sources */,
 				5F7AA9132048A6DA0029E5AA /* EndScene.swift in Sources */,
 				5F7AA90F20484BF60029E5AA /* Background.swift in Sources */,

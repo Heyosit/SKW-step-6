@@ -26,6 +26,7 @@ enum Z {
 enum SpriteSize {
     static let player = CGSize(width: 1000, height: 150)
     static let tomb = CGSize(width: 50, height: 50)
+    static let doctor = CGSize(width: 100, height: 15)
     static let sickle = CGSize(width: 20, height: 30)
     static let bullet = CGSize(width: 10, height: 10)
     static let mushroom = CGSize(width: 20, height: 20)
