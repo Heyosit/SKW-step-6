@@ -213,6 +213,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         //                    doc?.doctorHitPlayer()
                         doc.removeFromParent()
                         GameManager.shared.doctorIsIn = false
+                        let t = tomb as? Tomb
+                        for tomb in 0...3{
+                            if (GameManager.shared.tombsPosIndex[tomb].i == t?.posInMatrix.0 && GameManager.shared.tombsPosIndex[tomb].j == t?.posInMatrix.1){
+                                GameManager.shared.tombsPosIndex[tomb].i = 0
+                                GameManager.shared.tombsPosIndex[tomb].j = 0
+                            }
+                        }
+                        t?.posInMatrix
                         tomb.removeFromParent()
                         self.tombCount -= 1
                         self.hud.score = Scores.malus
@@ -250,19 +258,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let newTomb = Tomb()
         let posAdpt = CGPoint(x:  0, y:  newTomb.size.height / 2)
-        let i = arc4random_uniform(UInt32(GameManager.shared.maxRows))
-        //            debugPrint("i: \(i)")
-        var partJ = UInt32(GameManager.shared.maxRows) - i + 1
-            var secondPartJ = UInt32(GameManager.shared.maxColums) - (UInt32(GameManager.shared.maxRows) + i)
-        var j = arc4random_uniform(secondPartJ) + partJ
+            var isUsed = true
+            var i: UInt32 = 0
+            var j: UInt32 = 0
+            while isUsed{
+                isUsed = false
+                i = arc4random_uniform(UInt32(GameManager.shared.maxRows))
+                //            debugPrint("i: \(i)")
+                debugPrint("i: \(i), j: \(j)")
+                var partJ = UInt32(GameManager.shared.maxRows) - i + 1
+                var secondPartJ = UInt32(GameManager.shared.maxColums) - (UInt32(GameManager.shared.maxRows) + i)
+                j = arc4random_uniform(secondPartJ) + partJ
+                
+                for tomb in 0...3{
+                    if (GameManager.shared.tombsPosIndex[tomb].i == i && GameManager.shared.tombsPosIndex[tomb].j == j){
+                        isUsed = true
+                    }
+                }
+            }
+            
+        
         //            debugPrint("j: \(j)")
-            debugPrint("i: \(i), j: \(j)")
+            
         newTomb.position = plus(left: GameManager.shared.gameMatrix[Int(i)][Int(j)], right: posAdpt)
         newTomb.zPosition = CGFloat(GameManager.shared.maxRows - Int(i))
         tombCount += 1
+            
+            for tomb in 0...3{
+                if (GameManager.shared.tombsPosIndex[tomb].i == 0 && GameManager.shared.tombsPosIndex[tomb].j == 0){
+                    GameManager.shared.tombsPosIndex[tomb] = (i: Int(i), j: Int(j))
+                    newTomb.setPosition(i: Int(i), j: Int(j))
+                    addChild(newTomb)
+                    
+                    return
+                }
+            }
         
-//            GameManager.shared.tombsPosIndex
-        addChild(newTomb)
+            
+            
         }
         
     }

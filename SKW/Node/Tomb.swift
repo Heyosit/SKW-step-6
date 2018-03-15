@@ -10,6 +10,7 @@ import SpriteKit
 class Tomb: SKSpriteNode {
 
   let textureIdle = SKTexture(imageNamed: "brick")
+    var posInMatrix = (0,0)
 
 
   init() {
@@ -23,6 +24,9 @@ class Tomb: SKSpriteNode {
 //    self.physicsBody!.contactTestBitMask = PhysicsMask.bullet
 //    self.physicsBody!.collisionBitMask = 0
   }
+    func setPosition(i: Int, j: Int){
+        posInMatrix = (i,j)
+    }
 
   // Swift requires this initializer
   required init?(coder aDecoder: NSCoder) {
