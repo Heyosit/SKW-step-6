@@ -27,9 +27,11 @@ class HUD: SKNode {
     
     self.name = "HUD"
     
+
     scoreLabel.text = "Score: 0"
     scoreLabel.fontSize = 20
     scoreLabel.zPosition = Z.HUD
+    
 
     timerLabel.text = "Timer: 30"
     timerLabel.fontSize = 20
@@ -40,11 +42,11 @@ class HUD: SKNode {
   func setup(size: CGSize) {
     let spacing: CGFloat = 10
     scoreLabel.horizontalAlignmentMode = .left
-    scoreLabel.position = CGPoint(x: spacing, y: size.height - scoreLabel.frame.height - spacing)
+    scoreLabel.position = CGPoint(x: spacing + 100, y: size.height - scoreLabel.frame.height - spacing)
     addChild(scoreLabel)
 
     timerLabel.horizontalAlignmentMode = .right
-    timerLabel.position = CGPoint(x: size.width - spacing, y: size.height - timerLabel.frame.height - spacing)
+    timerLabel.position = CGPoint(x: size.width - 100, y: size.height - timerLabel.frame.height - spacing)
     addChild(timerLabel)
 
   }
