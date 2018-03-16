@@ -141,8 +141,8 @@ class Player: SKSpriteNode {
                 animPos,
                 animScaleX,
                 animScaleY,
-                animStarts,
-                SKAction.wait(forDuration: 0.2),
+//                animStarts,
+                SKAction.wait(forDuration: 0.5),
                 animRevX,
                 animRevY,
                 animEnd
@@ -286,8 +286,9 @@ class Player: SKSpriteNode {
     
     func setDestination(destination: CGPoint) {
         self.destination = plus(left: destination, right: playerPositionAdapted)
+            self.animate(type: "walk")
         firstTime = true
-        self.animate(type: "walk")
+        
     }
     func stickMovement(deltaTime: TimeInterval) {
         //if the player is attacking doesn't have to do this
@@ -298,7 +299,7 @@ class Player: SKSpriteNode {
                 self.animate(type: "idle")
                 self.xScale = fabs(self.xScale)
                 isIdle = true
-                self.playerBeHit()
+//                self.playerBeHit()
             }
             // Calculate Distance
             let distance = CGPoint(x: fabs(destination.x - position.x), y: fabs(destination.y - position.y))
@@ -374,7 +375,7 @@ class Player: SKSpriteNode {
             animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 12.0))
         case "attack":
             textureType = textureAttack
-            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 12.0))
+            animation = SKAction.animate(with: textureType, timePerFrame: (1.0 / 10.0))
             //        case "fire":
             //            textureType = textureFire
             //    case "beam":

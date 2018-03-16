@@ -21,10 +21,10 @@ class GameViewController: UIViewController {
       scene.scaleMode = .aspectFill // Fit the window
 
       // Debug
-      view.ignoresSiblingOrder = false
-      view.showsFPS = true
-      view.showsNodeCount = true
-      view.showsPhysics = true
+//      view.ignoresSiblingOrder = false
+//      view.showsFPS = true
+//      view.showsNodeCount = true
+//      view.showsPhysics = true
 
       // Load TextureAtlas
       let playerAtlas = SKTextureAtlas(named: "Sprites")

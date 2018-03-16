@@ -224,6 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                             doc.removeFromParent()
                                             GameManager.shared.doctorIsIn = false
                         GameManager.shared.loseTime(label: self.hud.timerLabel)
+                        self.hud.score = Scores.doctorMalus
 //                        self.oldLady.playerBeHit()
                     }
                     

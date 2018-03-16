@@ -13,8 +13,7 @@ class EndScene: SKScene {
 
     backgroundColor = .black
     
-    //restart the var in singleton for a new game
-    GameManager.shared.restartAll()
+    
     
   
 
@@ -40,9 +39,12 @@ class EndScene: SKScene {
       let scene = MenuScene(size: self.size)
       scene.scaleMode = .aspectFill
       let transitionType = SKTransition.flipHorizontal(withDuration: 0.5)
+       
       self.view?.presentScene(scene, transition: transitionType)
     }
     self.run(SKAction.sequence([wait, block]))
+    //restart the var in singleton for a new game
+    GameManager.shared.restartAll()
 
   }
 

@@ -36,6 +36,7 @@ enum SpriteSize {
 enum Scores {
     static let bonus = 15
     static let malus = -10
+    static let doctorMalus = -5
 }
 
 

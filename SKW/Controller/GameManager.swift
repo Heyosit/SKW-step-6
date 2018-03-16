@@ -74,6 +74,7 @@ class GameManager {
         (0,0)]
         
         doctorIsIn = false
+        score = 0
     }
     
     // Start Timer in Singleton thread
