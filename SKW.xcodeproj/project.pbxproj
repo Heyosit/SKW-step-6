@@ -13,8 +13,6 @@
 		15D455E5205929020073CCB4 /* startScream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15D455E2205929010073CCB4 /* startScream.mp3 */; };
 		15DFB5422059E62C0041B3B2 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFB5412059E62C0041B3B2 /* Functions.swift */; };
 		15DFB544205A8E660041B3B2 /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFB543205A8E660041B3B2 /* Doctor.swift */; };
-		5B5F3F3D205BAA65004B9D60 /* winMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B5F3F3C205BAA65004B9D60 /* winMusic.mp3 */; };
-		5B5F3F3F205BAA7D004B9D60 /* loseMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B5F3F3E205BAA7D004B9D60 /* loseMusic.mp3 */; };
 		5F3935CB204CA59600AEC461 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5F3935CA204CA59600AEC461 /* Sprites.atlas */; };
 		5F7AA90D20484ACE0029E5AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA90C20484ACE0029E5AA /* Constants.swift */; };
 		5F7AA90F20484BF60029E5AA /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7AA90E20484BF60029E5AA /* Background.swift */; };
@@ -45,8 +43,6 @@
 		15D455E2205929010073CCB4 /* startScream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startScream.mp3; sourceTree = "<group>"; };
 		15DFB5412059E62C0041B3B2 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		15DFB543205A8E660041B3B2 /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
-		5B5F3F3C205BAA65004B9D60 /* winMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = winMusic.mp3; path = ../../../../Desktop/Resources/winMusic.mp3; sourceTree = "<group>"; };
-		5B5F3F3E205BAA7D004B9D60 /* loseMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = loseMusic.mp3; path = ../../../../Desktop/Resources/loseMusic.mp3; sourceTree = "<group>"; };
 		5F3935CA204CA59600AEC461 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = SOURCE_ROOT; };
 		5F7AA90C20484ACE0029E5AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5F7AA90E20484BF60029E5AA /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
@@ -87,9 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				15D455E0205929010073CCB4 /* menuAudio.mp3 */,
-				5B5F3F3E205BAA7D004B9D60 /* loseMusic.mp3 */,
 				15D455E1205929010073CCB4 /* scene1Audio.mp3 */,
-				5B5F3F3C205BAA65004B9D60 /* winMusic.mp3 */,
 				15D455E2205929010073CCB4 /* startScream.mp3 */,
 			);
 			path = AudioFile;
@@ -240,7 +234,6 @@
 				15D455E5205929020073CCB4 /* startScream.mp3 in Resources */,
 				5FB36C21203E1BE000AD3F10 /* LaunchScreen.storyboard in Resources */,
 				5F895070204D27AD00F07123 /* beam.wav in Resources */,
-				5B5F3F3D205BAA65004B9D60 /* winMusic.mp3 in Resources */,
 				5F895073204D27AD00F07123 /* bad.m4a in Resources */,
 				15D455E3205929010073CCB4 /* menuAudio.mp3 in Resources */,
 				15D455E4205929020073CCB4 /* scene1Audio.mp3 in Resources */,
@@ -248,7 +241,6 @@
 				5F995B1A204834B500B4FDC8 /* Main.storyboard in Resources */,
 				5F89506E204D27AD00F07123 /* fire.m4a in Resources */,
 				5F895072204D27AD00F07123 /* police.m4a in Resources */,
-				5B5F3F3F205BAA7D004B9D60 /* loseMusic.mp3 in Resources */,
 				5F3935CB204CA59600AEC461 /* Sprites.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,7 +396,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8QDW2Q72F;
+				DEVELOPMENT_TEAM = T5MRSW4LGP;
 				INFOPLIST_FILE = SKW/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -422,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W8QDW2Q72F;
+				DEVELOPMENT_TEAM = T5MRSW4LGP;
 				INFOPLIST_FILE = SKW/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
