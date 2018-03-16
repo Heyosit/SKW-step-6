@@ -96,9 +96,10 @@ class Player: SKSpriteNode {
     }
     
     func attack(){
-        self.animate(type: "attack")
+        
         // controls if the player is already attackin
         if !attacking{
+            self.animate(type: "attack")
             attacking = true
             //            let sickle = SKSpriteNode(color: SKColor.green, size: SpriteSize.sickle)
             //            sickle.name = "sickle"

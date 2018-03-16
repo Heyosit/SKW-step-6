@@ -13,6 +13,9 @@ class EndScene: SKScene {
 
     backgroundColor = .black
     
+    //restart the var in singleton for a new game
+    GameManager.shared.restartAll()
+    
   
 
     let endSceneVictoryBackground = SKSpriteNode(imageNamed: "endSceneVictory")

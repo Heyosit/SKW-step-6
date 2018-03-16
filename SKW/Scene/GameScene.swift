@@ -164,17 +164,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             spawnDoctor()
 //            doctorCreationTime = currentTime + 11.5
         }
+        
 
         
         oldLady.update(deltaTime: dt)
+        isPlayerAttackingTomb()
         checkPlayerDoctorCollision()
         checkTombDoctorCollision()
         spawnTombs()
         checkTimer()
         
         
+        
         //        checkSimpleCollision()
         
+    }
+    
+    func isPlayerAttackingTomb(){
+        if oldLady.attacking{
+            debugPrint("PLAYER IS ATTACKING")
+            self.enumerateChildNodes(withName: "tomb") { tomb, stop in
+                if let t = tomb as? Tomb {
+                    debugPrint("Found a TOMB")
+                    debugPrint("tomb pos i: \(t.posInMatrix.0), pos j: \(t.posInMatrix.1)")
+                    debugPrint("OLD LADY pos i: \(self.oldLady.squarePlayerPosition.0), pos j: \(self.oldLady.squarePlayerPosition.1)")
+                    if t.posInMatrix.0 == self.oldLady.squarePlayerPosition.0 && t.posInMatrix.1 == self.oldLady.squarePlayerPosition.1 + 2{
+                        GameManager.shared.gainTime(label: self.hud.timerLabel)
+                        for count in 0...3{
+                            if (GameManager.shared.tombsPosIndex[count].i == t.posInMatrix.0 && GameManager.shared.tombsPosIndex[count].j == t.posInMatrix.1){
+                                GameManager.shared.tombsPosIndex[count].i = 0
+                                GameManager.shared.tombsPosIndex[count].j = 0
+                            }
+                        }
+                        tomb.removeFromParent()
+                        
+                        self.tombCount -= 1
+                        self.hud.score = Scores.bonus
+                    }
+                }
+            }
+        }
     }
     
     func spawnDoctor(){
@@ -195,7 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                             doc.removeFromParent()
                                             GameManager.shared.doctorIsIn = false
                         GameManager.shared.loseTime(label: self.hud.timerLabel)
-                        self.oldLady.playerBeHit()
+//                        self.oldLady.playerBeHit()
                     }
                     
                 }
@@ -220,7 +249,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                 GameManager.shared.tombsPosIndex[tomb].j = 0
                             }
                         }
-                        t?.posInMatrix
+//                        t?.posInMatrix
                         tomb.removeFromParent()
                         self.tombCount -= 1
                         self.hud.score = Scores.malus
@@ -265,16 +294,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 isUsed = false
                 i = arc4random_uniform(UInt32(GameManager.shared.maxRows))
                 //            debugPrint("i: \(i)")
-                debugPrint("i: \(i), j: \(j)")
+                
                 var partJ = UInt32(GameManager.shared.maxRows) - i + 1
                 var secondPartJ = UInt32(GameManager.shared.maxColums) - (UInt32(GameManager.shared.maxRows) + i)
-                j = arc4random_uniform(secondPartJ) + partJ
-                
+                j = arc4random_uniform(secondPartJ - 1) + partJ
+                debugPrint("i: \(i), j: \(j)")
                 for tomb in 0...3{
                     if (GameManager.shared.tombsPosIndex[tomb].i == i && GameManager.shared.tombsPosIndex[tomb].j == j){
                         isUsed = true
                     }
+                    if (i == oldLady.squarePlayerPosition.0 && j == oldLady.squarePlayerPosition.1 + 1) {
+                        isUsed = true
+                    }
                 }
+                
             }
             
         
