@@ -94,6 +94,10 @@ class GameManager {
         timerCounter += 3
         label.text = "Timer: \(self.timerCounter)"
     }
+    func gainTimeByDoctor(label: SKLabelNode) {
+        timerCounter += 1
+        label.text = "Timer: \(self.timerCounter)"
+    }
     
     
     
