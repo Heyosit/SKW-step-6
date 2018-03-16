@@ -28,7 +28,7 @@ class MenuScene: SKScene {
 
     let buttonStart = SKSpriteNode(imageNamed: "start")
     buttonStart.name = "buttonStart"
-    buttonStart.position = CGPoint(x: view.frame.midX + ( size.width / 4 ), y: size.height / 2)
+    buttonStart.position = CGPoint(x: view.frame.midX + ( size.width / 3 ) - 10, y: size.height / 2)
     buttonStart.size = SpriteSize.button
     buttonStart.zPosition = Z.HUD
     addChild(buttonStart)
