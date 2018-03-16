@@ -168,9 +168,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         
         oldLady.update(deltaTime: dt)
+        isPlayerAttackingDoctor()
         isPlayerAttackingTomb()
-        checkPlayerDoctorCollision()
+        
         checkTombDoctorCollision()
+        checkPlayerDoctorCollision()
         spawnTombs()
         checkTimer()
         
@@ -200,6 +202,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         
                         self.tombCount -= 1
                         self.hud.score = Scores.bonus
+                    }
+                }
+            }
+        }
+    }
+    
+    func isPlayerAttackingDoctor(){
+        if oldLady.attacking{
+            debugPrint("PLAYER IS ATTACKING")
+            enumerateChildNodes(withName: "doctor") { doc, stop in
+                self.enumerateChildNodes(withName: "player") { player, stop in
+                    debugPrint("Found doctor")
+                    if player.frame.intersects(doc.frame) {
+                        if player.zPosition == doc.zPosition{
+                            debugPrint("player and doctor Intersected!")
+                    
+//                    debugPrint("OLD LADY pos i: \(self.oldLady.squarePlayerPosition.0), pos j: \(self.oldLady.squarePlayerPosition.1)")
+//                    if t.posInMatrix.0 == self.oldLady.squarePlayerPosition.0 && t.posInMatrix.1 == self.oldLady.squarePlayerPosition.1 + 2{
+                        doc.removeFromParent()
+                        GameManager.shared.doctorIsIn = false
+                        GameManager.shared.gainTimeByDoctor(label: self.hud.timerLabel)
+                        self.hud.score = Scores.doctorBonus
+                        }
                     }
                 }
             }
